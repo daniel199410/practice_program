@@ -1,7 +1,16 @@
 package unit_tests;
 
-import beverages.*;
+import additions.Cream;
+import additions.Milk;
+import beverages.Beverage;
+import beverages.BeverageWithAdditions;
+import beverages.Coffee;
+import beverages.HotChocolate;
+import beverages.Tea;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,25 +37,25 @@ public class BeveragesPricingTest {
 
     @Test
     public void computes_tea_with_milk_price() {
-        Tea teaWithMilk = new TeaWithMilk();
+        Beverage teaWithMilk = new BeverageWithAdditions(new Tea(), Collections.singletonList(new Milk()));
         assertThat(teaWithMilk.price(), is(closeTo(1.60, 0.001)));
     }
 
     @Test
     public void computes_coffee_with_milk_price() {
-        Coffee coffeeWithMilk = new CoffeeWithMilk();
+        Beverage coffeeWithMilk = new BeverageWithAdditions(new Coffee(), Collections.singletonList(new Milk()));
         assertThat(coffeeWithMilk.price(), is(closeTo(1.30, 0.001)));
     }
 
     @Test
     public void computes_coffee_with_milk_and_cream_price() {
-        Coffee coffeeWithMilkAndCream = new CoffeeWithMilkAndCream();
+        Beverage coffeeWithMilkAndCream = new BeverageWithAdditions(new Coffee(), Arrays.asList(new Milk(), new Cream()));
         assertThat(coffeeWithMilkAndCream.price(), is(closeTo(1.45, 0.001)));
     }
 
     @Test
     public void computes_hot_chocolate_with_cream_price() {
-        HotChocolateWithCream hotChocolateWithCream = new HotChocolateWithCream();
+        Beverage hotChocolateWithCream = new BeverageWithAdditions(new HotChocolate(), Collections.singletonList(new Cream()));
         assertThat(hotChocolateWithCream.price(),  is(closeTo(1.60, 0.001)));
     }
 }
